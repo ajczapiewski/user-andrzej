@@ -38,7 +38,7 @@ def create_daily_backup_sqlite_cron_job():
     cron = "@daily {} >> {} 2>&1".format(SCRIPT, LOGFILE)
     run('echo \"{}\" | crontab'.format(cron))
 
-task
+@task
 def create_daily_alert_check_cron_job():
     SCRIPT = ('/usr/lib/cytora/data-services-front-end/'
               'cytora/scripts/daily_alert_check.sh')
