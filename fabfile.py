@@ -20,7 +20,7 @@ def backup_sqlite_deploy():
     put ('backup-sqlite.py', '/usr/lib/cytora', use_sudo=True)
 
 @task 
-def rsync_deploy();
+def rsync_deploy():
     put ('backup-rsync.sh', '/usr/lib/cytora', use_sudo=True)
     sudo ('chmod u+x /usr/lib/cytora/backup-rsync.sh')
 
