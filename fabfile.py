@@ -6,7 +6,7 @@ from fabric.api import *
 def production():
     env.forward_agent = True
     env.user = 'root'
-    env.hosts = ['208.68.39.191']
+    env.hosts = ['162.243.35.155']
 
 @task
 def backup():
