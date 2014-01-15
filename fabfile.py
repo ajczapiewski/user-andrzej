@@ -15,7 +15,7 @@ def backup():
     env.hosts = ['162.243.234.7']
     
 @task
-def backup-sqlite_deploy():
+def backup_sqlite_deploy():
     sudo ('mkdir -p /usr/lib/cytora')
     put ('backup-sqlite.py', '/usr/lib/cytora', use sudo=True)
 
@@ -25,15 +25,27 @@ def rsync_deploy();
     sudo ('chmod u+x /usr/lib/cytora/backup-rsync.sh')
 
 @task
-def create_daily_backup-rsync_cron_job():
+def create_daily_backup_rsync_cron_job():
     SCRIPT = ('/usr/lib/cytora/backup-rsync.sh')
     LOGFILE = '/var/log/rsync-backup.txt'
     cron = "@daily {} >> {} 2>&1".format(SCRIPT, LOGFILE)
     run('echo \"{}\" | crontab'.format(cron))
 
 @task
-def create_daily_backup-sqlite_cron_job():
+def create_daily_backup_sqlite_cron_job():
     SCRIPT = ('/usr/lib/cytora/backup-sqlite.py')
     LOGFILE = '/var/log/sqlite-backup.txt'
     cron = "@daily {} >> {} 2>&1".format(SCRIPT, LOGFILE)
     run('echo \"{}\" | crontab'.format(cron))
+
+#BOOTSTRAPS
+
+@task
+def production_backup
+    backup_sqlite_deploy()
+    create_daily_backup_sqlite_cron_job()
+
+@task 
+def backup_backup
+    rsync_deploy()
+    create_daily_backup_rsync_cron_job()
