@@ -41,11 +41,11 @@ def create_daily_backup_sqlite_cron_job():
 #BOOTSTRAPS
 
 @task
-def production_backup
+def production_backup():
     backup_sqlite_deploy()
     create_daily_backup_sqlite_cron_job()
 
 @task 
-def backup_backup
+def backup_backup():
     rsync_deploy()
     create_daily_backup_rsync_cron_job()
