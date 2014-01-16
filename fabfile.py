@@ -28,8 +28,7 @@ def rsync_deploy():
 def create_daily_backup_rsync_cron_job():
     SCRIPT = ('/usr/lib/cytora/backup-rsync.sh')
     LOGFILE = '/var/log/rsync-backup.txt'
-    cron = "@daily {} >> {} 2>&1".format(SCRIPT, LOGFILE)
-    run('echo \"{}\" | crontab'.format(cron))
+    run("crontab -l | {{ cat; echo '@daily {} >> {} 2>&1' ; }} | crontab -".format(SCRIPT, LOGFILE))
 
 @task
 def create_daily_backup_sqlite_cron_job():
