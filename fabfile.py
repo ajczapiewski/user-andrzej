@@ -35,7 +35,7 @@ def create_daily_backup_rsync_cron_job():
 def create_daily_backup_sqlite_cron_job():
     SCRIPT = ('/usr/lib/cytora/backup-sqlite.py')
     LOGFILE = '/var/log/sqlite-backup.txt'
-    run("crontab -l | \{ cat ; echo '@daily {} >> {} 2>&1' ; \} | crontab".format(SCRIPT, LOGFILE) 
+    run("crontab -l | {{ cat; echo '@daily {} >> {} 2>&1' ; }} | crontab -".format(SCRIPT, LOGFILE)) 
 
 #BOOTSTRAPS
 
